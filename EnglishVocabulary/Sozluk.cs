@@ -8,6 +8,11 @@ namespace EnglishVocabulary
 {
     public class Sozluk
     {
+        //  Sözcük listeleri aynı adlı iki kelime girişi engel olmalı
+        //  Veri yapısı olarak bir dizi kullanılması (Veya list) bu durumda
+        //  her bir yeni veri ilavesinde, veri yapısındaki mevcut elemanların
+        //  sorgulanması gerekecektir. Bu yüzden veri yapsı olarak bir
+        //  Dictionary kullılması daha uygundur.
         WordList<WordRoot> WeakDict;
         WordList<WordRoot> MediumDict;
         WordList<WordRoot> StrongDict;
