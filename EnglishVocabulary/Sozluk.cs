@@ -6,26 +6,22 @@ using System.Threading.Tasks;
 
 namespace EnglishVocabulary
 {
-    public class Sozluk
+    public class Sozluk<K,V> where V :WordRoot
     {
-        //  Sözcük listeleri aynı adlı iki kelime girişi engel olmalı
-        //  Veri yapısı olarak bir dizi kullanılması (Veya list) bu durumda
-        //  her bir yeni veri ilavesinde, veri yapısındaki mevcut elemanların
-        //  sorgulanması gerekecektir. Bu yüzden veri yapsı olarak bir
-        //  Dictionary kullılması daha uygundur.
-        WordList<WordRoot> WeakDict;
-        WordList<WordRoot> MediumDict;
-        WordList<WordRoot> StrongDict;
+        Dictionary<K, V> WeakDict;
+        Dictionary<K, V> MediumDict;
+        Dictionary<K, V> StrongDict;
 
         public Sozluk()
         {
-            WeakDict = new WordList<WordRoot>();
+            WeakDict = new Dictionary<K, V>();
+            MediumDict = new Dictionary<K, V>();
+            StrongDict = new Dictionary<K, V>(); 
         }
 
-        public void Transfer(WordRoot Word, WordList<WordRoot> WordList)
+        public void Transfer(WordRoot Word, Dictionary<K, V> WordList)
         {
-            //  Word, bulunduğu WordList'ten silinmeli ve hedef WordList'e akatarılmalı.
-            if(Word.WordLevel)
+            //  Word, bulunduğu WordList'ten silinmeli ve uygun WordList'e akatarılmalı.
         }
 
         public void IncreasePoint(WordRoot Word,int Point)
@@ -76,7 +72,5 @@ namespace EnglishVocabulary
                 return StrongDict.Count;
             }
         }
-
-
     }
 }

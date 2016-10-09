@@ -15,37 +15,44 @@ namespace EnglishVocabulary
     {
         public enum Level {Weak=0,Medium=1,Strong=2 };
 
-        string _Word;    // English Word (Key Value)
-        string _Type;    // Kelime Tipi (Noun, Verb, etc.) 
+        string _EnglishWord;            //  English Word (Key Value)
+        string _WordType;               //  Kelime Tipi (Noun, Verb, etc.) 
+        string[] _DefinitionsinTurkish; //  Meanings in Turkish
+        string[] _DefinitionsinEnglish; //  Meanings in English
+        string[] _SampleSentences;      //  SampleSentences in English
+        string[] _Synonyms;             //  Eşanlamlı sözcükler
+        string[] _Antonyms;             //  Zıt anlamlı sözcükler
+        string[] _Hints;                //  Hints
+        int _WordPoint;                 //  Kelimenin başarı puanı
+        Level _WordLevel;               //  Kelimenin düzeyi
 
-        string[] _DefinationsinTurkish;   //  Meanings in Turkish
-        string[] _DefinationsinEnglish;    //  Meanings in English
-
-        string[] _SampleSentences;   // SampleSentences
-        string[] _Hints;    //  Hints
-
-        int _WordPoint; //  Kelimenin başarı puanı
-        Level _WordLevel;  //  Kelimenin düzeyi
+        string[] _WordDefinitation;
 
         public WordRoot() { }
-        public WordRoot(string Word)
+        public WordRoot(string Word,string Type)
         {
-            _Word = Word;
+            _EnglishWord = Word;
+            _WordType = Type;
             _WordPoint = 0;
             _WordLevel = Level.Weak;
+
+            _WordDefinitation = new string[3];
+            _WordDefinitation[0] = _EnglishWord;
+            _WordDefinitation[1] = _WordType;
+            _WordDefinitation[2] = _WordPoint.ToString();
         }
         public WordRoot(string Word, string Type, string[] DefTurk, string[] DefEng,
                         string[] Samples, string[] Hints)
         {
-            _Word = Word;
-            _Type = Type;
+            _EnglishWord = Word;
+            _WordType = Type;
             _WordLevel = Level.Weak;
 
-            _DefinationsinTurkish = new string[DefTurk.Length];
-            DefTurk.CopyTo(_DefinationsinTurkish, 0);
+            _DefinitionsinTurkish = new string[DefTurk.Length];
+            DefTurk.CopyTo(_DefinitionsinTurkish, 0);
 
-            _DefinationsinEnglish = new string[DefEng.Length];
-            DefEng.CopyTo(_DefinationsinEnglish, 0);
+            _DefinitionsinEnglish = new string[DefEng.Length];
+            DefEng.CopyTo(_DefinitionsinEnglish, 0);
 
             _SampleSentences = new string[Samples.Length];
             Samples.CopyTo(_SampleSentences, 0);
@@ -56,10 +63,16 @@ namespace EnglishVocabulary
             _WordPoint = 0;
         }
 
+        //  Word Definitation
+        public string[] WordDefination
+        {
+            get { return _WordDefinitation; }
+        }
+
         public string Word
         {
-            get { return _Word; }
-            set { _Word = value; }
+            get { return _EnglishWord; }
+            set { _EnglishWord = value; }
         }
 
         //  Oyunun kurallarına bağlı olarak seviyeler belirlenir.
@@ -75,33 +88,38 @@ namespace EnglishVocabulary
 
         public Level WordLevel
         {
-            get
-            {
-                return _WordLevel;
-            }
+            get { return _WordLevel; }
         }
 
         public string Type
         {
-            get { return _Type; }
-            set { _Type = value; }
+            get { return _WordType; }
+            set { _WordType = value; }
         }
 
-        public string[] Turkish
+        public string[] TurkishDef
         {
-            get { return _DefinationsinTurkish; }
-            //set { _DefinationsinTurkish = value; }
+            get { return _DefinitionsinTurkish; }
         }
 
-        public string[] English
+        public string[] EnglishDef
         {
-            get { return _DefinationsinEnglish; }
-            //set { _DefinationsinEnglish = value; }
+            get { return _DefinitionsinEnglish; }
         }
 
         public string[] Samples
         {
             get { return _SampleSentences; }
+        }
+
+        public string[] Synonyms
+        {
+            get { return _Synonyms; }
+        }
+
+        public string[] Antonyms
+        {
+            get { return _Antonyms; }
         }
 
         public string[] Hints
@@ -117,18 +135,18 @@ namespace EnglishVocabulary
 
         public void AddDefTurk(string Defination)
         {
-            string[] temp = new string[_DefinationsinTurkish.Length + 1];
-            _DefinationsinTurkish.CopyTo(temp, 0);
+            string[] temp = new string[_DefinitionsinTurkish.Length + 1];
+            _DefinitionsinTurkish.CopyTo(temp, 0);
             temp[temp.Length - 1] = Defination;
-            _DefinationsinTurkish = temp;
+            _DefinitionsinTurkish = temp;
         }
 
         public void AddDefEng(string Defination)
         {
-            string[] temp = new string[_DefinationsinEnglish.Length + 1];
-            _DefinationsinEnglish.CopyTo(temp, 0);
+            string[] temp = new string[_DefinitionsinEnglish.Length + 1];
+            _DefinitionsinEnglish.CopyTo(temp, 0);
             temp[temp.Length - 1] = Defination;
-            _DefinationsinEnglish = temp;
+            _DefinitionsinEnglish = temp;
         }
 
         public void AddSample(string Sample)
@@ -137,6 +155,22 @@ namespace EnglishVocabulary
             _SampleSentences.CopyTo(temp, 0);
             temp[temp.Length - 1] = Sample;
             _SampleSentences = temp;
+        }
+
+        public void AddSynonym(string Synonym)
+        {
+            string[] temp = new string[_Synonyms.Length + 1];
+            _Synonyms.CopyTo(temp, 0);
+            temp[temp.Length - 1] = Synonym;
+            _Synonyms = temp;
+        }
+
+        public void AddAntonym(string Antonym)
+        {
+            string[] temp = new string[_Antonyms.Length + 1];
+            _Antonyms.CopyTo(temp, 0);
+            temp[temp.Length - 1] = Antonym;
+            _Antonyms = temp;
         }
 
         public void AddHint(string Hint)

@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Games\Game1.cs" />
+    <Compile Include="Games\GameRoot.cs" />
+    <Compile Include="Games\Questions.cs" />
     <Compile Include="Sozluk.cs" />
-    <Compile Include="WordList.cs" />
     <Compile Include="WordRoot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
